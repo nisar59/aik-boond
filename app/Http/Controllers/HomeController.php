@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use Modules\Users\Entities\People;
 use Modules\Donors\Entities\Donor;
-use Modules\Doctor\Entities\Doctor;
 use Auth;
 class HomeController extends Controller
 {
@@ -27,8 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $people=People::count();
-        $doctor=Doctor::count();
+        $people=0;
+        $doctor=0;
         $donor=Donor::count();
         return view('home',compact('people','doctor','donor'));
 

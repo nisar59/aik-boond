@@ -6,7 +6,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Donors\Entities\Donor;
-use Modules\Upazila\Entities\Upazila;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 class DonorsController extends Controller
@@ -39,7 +38,7 @@ class DonorsController extends Controller
                 })
 
                 ->editColumn('upazila_name', function ($row) {
-                    return Upazila($row->upazila_name) ;
+                    return $row->upazila_name ;
                 })
                 ->editColumn('blood_group', function ($row) {
                     return $row->blood_group;
