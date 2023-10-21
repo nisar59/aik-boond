@@ -74,7 +74,7 @@ class DonorsController extends Controller
      */
     public function create()
     {
-        $doner=Upazila::all();
+        $doner=[];
         return view('donors::create',compact('doner'));
     }
 
@@ -132,7 +132,7 @@ class DonorsController extends Controller
      */
     public function edit($id)
     {
-        $doner=Upazila::all();
+        $doner=[];
         $this->data['donor']=Donor::find($id);
         return view('donors::edit',compact('doner'))->withData($this->data);
     }
