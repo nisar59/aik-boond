@@ -12,6 +12,7 @@ use Modules\Areas\Entities\Areas;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use DB;
+use Carbon\Carbon;
 class DonorsController extends Controller
 {
     /**
@@ -31,14 +32,23 @@ class DonorsController extends Controller
              if ($req->name != null) {
             $donors->where('name', $req->name);
             }
+             if ($req->state_id != null) {
+            $donors->where('state_id', $req->state_id);
+            }
+             if ($req->city_id != null) {
+            $donors->where('city_id', $req->city_id);
+            }
+            if ($req->area_id != null) {
+            $donors->where('area_id', $req->area_id);
+            }
             if ($req->address != null) {
             $donors->where('address', $req->address);
             } 
             if ($req->contact_number != null) {
             $donors->where('contact_no','LIKE','%'.$req->contact_number.'%');
             }
-            if ($req->area != null) {
-            $donors->where('area_id',$req->area);
+            if ($req->last_donate_date != null) {
+            $donors->where('last_donate_date',$req->last_donate_date);
             }
             $total=$donors->count();
 
@@ -75,13 +85,17 @@ class DonorsController extends Controller
            {
                return Area($row->area_id);
            })
+           ->editColumn('last_donate_date',function($row)
+             {
+                 return Carbon::parse($row->last_donate_date)->format('d-m-Y');
+             })
            ->rawColumns(['action'])
            ->make(true);
         }
-
-
-
-        return view('donors::index');
+         $states=States::where('country_id',167)->get();
+         $cities=Cities::where('country_id',167)->get();
+         $areas=Areas::where('country_id',167)->get();
+        return view('donors::index',compact('states','cities','areas'));
     }
 
     /**
@@ -104,7 +118,6 @@ class DonorsController extends Controller
         $req->validate([
             'name'=>'required',
             'age'=>'required',
-            'country_id'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',

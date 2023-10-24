@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('title')
-Blood Donors
+Addresses And Towns
 @endsection
 @section('content')
 <section class="section">
@@ -15,12 +15,7 @@ Blood Donors
             <div class="collapse multi-collapse" id="multiCollapseExample2" data-bs-parent="#filters-container">
               <div class="p-3 accordion-body">
                 <div class="row">
-                  
-                  <div class="col-md-4 form-group">
-                    <label for="">Name</label>
-                    <input type="text" class="form-control filters" name="name" placeholder="Name">
-                  </div>
-                  <div class="col-md-4 form-group">
+                  <div class="col-md-6 form-group">
                     <label for="">State</label>
                     <select class="form-control filters" name="state_id">
                       <option value="">-- Select State --</option>
@@ -29,7 +24,7 @@ Blood Donors
                       @endforeach
                     </select>
                   </div>
-                  <div class="col-md-4 form-group">
+                  <div class="col-md-6 form-group">
                     <label for="">City</label>
                     <select class="form-control filters" name="city_id">
                       <option value="">-- Select City --</option>
@@ -38,7 +33,7 @@ Blood Donors
                       @endforeach
                     </select>
                   </div>
-                  <div class="col-md-3 form-group">
+                  <div class="col-md-6 form-group">
                     <label for="">Area</label>
                     <select class="form-control filters" name="area_id">
                       <option value="">-- Select Area --</option>
@@ -47,17 +42,9 @@ Blood Donors
                       @endforeach
                     </select>
                   </div>
-                  <div class="col-md-3 form-group">
-                    <label for="">Address</label>
-                    <input type="text" class="form-control filters" name="address" placeholder="Address">
-                  </div>
-                  <div class="col-md-3 form-group">
-                    <label for="">Contact Number</label>
-                    <input type="text" class="form-control filters" name="contact_number" placeholder="Contact Number">
-                  </div>
-                  <div class="col-md-3 form-group">
-                    <label for="">Date</label>
-                    <input type="date" class="form-control filters" name="last_donate_date" placeholder="Date Time">
+                  <div class="col-md-6 form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control filters" name="name" placeholder="Name">
                   </div>
                 </div>
               </div>
@@ -68,14 +55,14 @@ Blood Donors
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h4 class="col-md-6">Blood Donors</h4>
+            <h4 class="col-md-6">Addresses And Towns</h4>
             <div class="col-md-6 text-right">
-              <a href="{{url('donors/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('addresses-and-towns/create')}}" class="btn btn-success">+</a>
             </div>
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table table-striped table-hover table-sm" id="donors" style="width:100%;">
+              <table class="table table-striped table-hover table-sm" id="addresses_and_towns" style="width:100%;">
                 <thead>
                   <tr>
                     <th>Country Name</th>
@@ -83,11 +70,6 @@ Blood Donors
                     <th>City Name</th>
                     <th>Area</th>
                     <th>Name</th>
-                    <th>Age</th>
-                    <th>Address</th>
-                    <th>Blood Group</th>
-                    <th>Contact No</th>
-                    <th>Last Donated Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -108,27 +90,22 @@ Blood Donors
 $(document).ready( function(){
   var data_table;
   function DataTableInit(data={}) {
-  data_table = $('#donors').DataTable({
+  data_table = $('#addresses_and_towns').DataTable({
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('donors')}}",
+        url:"{{url('addresses-and-towns')}}",
         data:data,
         },
       buttons:[],
       buttons:[],
               columns: [
-                {data: 'country_id', name: 'country_id'},
-                {data: 'state_id', name: 'state_id'},
-                {data: 'city_id', name: 'city_id'},
-                {data: 'area_id', name: 'area_id'},
+                {data: 'country_id', name: 'country_id',class:'text-center'},
+                {data: 'state_id', name: 'state_id',class:'text-center'},
+                {data: 'city_id', name: 'city_id',class:'text-center'},
+                {data: 'area_id', name: 'area_id',class:'text-center'},
                 {data: 'name', name: 'name'},
-                {data: 'age', name: 'age'},
-                {data: 'address', name: 'address'},
-                {data: 'blood_group', name: 'blood_group'},
-                {data: 'contact_no', name: 'contact_no'},
-                {data: 'last_donate_date', name: 'last_donate_date'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
+                {data: 'action', name: 'action', orderable: false, searchable: false,class:'text-center'},
             ]
   });
 }

@@ -60,6 +60,13 @@ $pref=Request()->route()->getPrefix();
             </li>
             @endcan
 
+            <li class="menu-header">Addresses And Towns</li>
+            @can('addresses-and-towns.view')
+            <li class="dropdown @if($pref=='/addresses-and-towns') active @endif">
+              <a href="{{url('addresses-and-towns')}}" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i><span>Addresses And Towns</span></a>
+            </li>
+            @endcan
+
 
             @can('settings.view')
             <li class="menu-header">Panel Settings</li>

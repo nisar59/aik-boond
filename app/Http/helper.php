@@ -10,6 +10,11 @@ function AllPermissions()
 	$role=[];
 	$role['users']=['view','add','edit','delete'];
 	$role['permissions']=['view','add','edit','delete'];
+	$role['country']=['view','add','edit','delete'];
+	$role['states']=['view','add','edit','delete'];
+	$role['cities']=['view','add','edit','delete'];
+	$role['areas']=['view','add','edit','delete'];
+	$role['addresses-and-towns']=['view','add','edit','delete'];
 	$role['donors']=['view','add','edit','delete'];
 	$role['settings']=['view','add','edit','delete'];
 

@@ -17,11 +17,21 @@ Cities
                 <div class="row">
                   <div class="col-md-4 form-group">
                     <label for="">Country Name</label>
-                    <input type="text" class="form-control filters" name="country_id" placeholder="Country Name">
+                    <select name="country_id" class="form-control filters">
+                     <option value="">Select Country</option>
+                     @foreach($countries as $country)
+                     <option value="{{$country->id}}">{{$country->name}}</option>
+                     @endforeach
+                    </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="">State Name</label>
-                    <input type="text" class="form-control filters" name="state_id" placeholder="State Name">
+                    <select name="state_id" class="form-control filters">
+                     <option value="">Select State</option>
+                     @foreach($states as $state)
+                     <option value="{{$state->id}}">{{$state->name}}</option>
+                     @endforeach
+                    </select>
                   </div>
                   <div class="col-md-4 form-group">
                     <label for="">City Name</label>

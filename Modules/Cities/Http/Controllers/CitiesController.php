@@ -67,7 +67,9 @@ class CitiesController extends Controller
            ->rawColumns(['action'])
            ->make(true);
         }
-        return view('cities::index');
+        $countries=Country::all();
+        $states=States::all();
+        return view('cities::index',compact('countries','states'));
     }
 
     /**

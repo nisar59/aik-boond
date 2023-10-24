@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Country\Entities\Country;
 use Modules\States\Entities\States;
+use Modules\Cities\Entities\Cities;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use DB;
@@ -18,26 +19,49 @@ class StatesController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()) {
-        $states=States::select('*')->orderBy('id','ASC')->get();
-            return DataTables::of($states)
-                ->addColumn('action', function ($row) {
-                    $action='';
-                if(Auth::user()->can('states.edit')){
-                $action.='<a class="btn btn-primary btn-sm" href="'.url('states/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
-                }
-                if(Auth::user()->can('states.delete')){
-                $action.='
-                    <a class="btn btn-danger btn-sm" href="'.url('states/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
-                }                            
-                return $action;
-                })->editColumn('country_id', function ($row) {
-                    return Country($row->country_id);
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+       $req=request();
+
+         if ($req->ajax()) {
+
+            $strt=$req->start;
+            $length=$req->length;
+
+            $states=States::query();
+             if ($req->country_id != null) {
+            $states->where('country_id', $req->country_id);
+            }
+            if ($req->name != null) {
+            $states->where('name',$req->name);
+            }
+            $total=$states->count();
+
+           $states=$states->offset($strt)->limit($length)->get();
+
+           return DataTables::of($states)
+           ->setOffset($strt)
+           ->with([
+                'recordsTotal'=>$total,
+                'recordsFiltered'=>$total
+           ])
+           ->addColumn('action',function ($row){
+               $action='';
+               if(Auth::user()->can('states')){
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('states/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+            }
+            if(Auth::user()->can('states.delete')){
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('states/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+           }
+               return $action;
+           })->editColumn('country_id',function ($row)
+           {
+               return Country($row->country_id);
+           })
+           ->rawColumns(['action'])
+           ->make(true);
         }
-        return view('states::index');
+        $countries=Country::all();
+        $states=States::all();
+        return view('states::index',compact('countries','states'));
     }
 
     /**

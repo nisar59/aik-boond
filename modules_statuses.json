@@ -6,5 +6,6 @@
     "Country": true,
     "States": true,
     "Cities": true,
-    "Areas": true
+    "Areas": true,
+    "AddressesAndTowns": true
 }
