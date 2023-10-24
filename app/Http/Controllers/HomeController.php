@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Donors\Entities\Donor;
+use Modules\States\Entities\States;
+use Modules\Cities\Entities\Cities;
+use Modules\Areas\Entities\Areas;
 use Auth;
 class HomeController extends Controller
 {
@@ -31,4 +34,36 @@ class HomeController extends Controller
         return view('home',compact('people','doctor','donor'));
 
     }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function fetchStates(Request $req)
+    {
+        $data['states'] = States::where("country_id", $req->country_id)->get(["name", "id"]);
+        return response()->json($data);
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
+    public function fetchCity(Request $req)
+    {
+        $data['cities'] =Cities::where("state_id", $req->state_id)->get(["name", "id"]);                          
+        return response()->json($data);
+    }
+        /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+        public function fetchAreas(Request $req)
+    {
+        $data['areas'] =Areas::where("city_id", $req->city_id)->get(["name", "id"]);                          
+        return response()->json($data);
+    }
+    
 }

@@ -35,3 +35,6 @@ Route::get('optimize-storffy', function () {
 Auth::routes();
 Route::any('logout', 'Auth\LoginController@logout');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::post('states','HomeController@fetchStates');
+Route::post('cities','HomeController@fetchCity');
+Route::post('areas','HomeController@fetchAreas');

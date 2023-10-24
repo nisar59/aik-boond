@@ -4,6 +4,50 @@ Blood Donors
 @endsection
 @section('content')
         <section class="section">
+<div class="col-12">
+    <div class="card card-primary" id="filters-container">
+      <div class="card-header bg-white" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
+        <h4><i class="fas fa-filter"></i> Filters</h4>
+      </div>
+      <div class="card-body p-0">
+        <div class="collapse multi-collapse" id="multiCollapseExample2" data-bs-parent="#filters-container">
+          <div class="p-3 accordion-body">
+            <div class="row">
+              
+              <div class="col-md-4 form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control filters" name="name" placeholder="Name">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">State</label>
+                <input type="text" class="form-control filters" name="state" placeholder="State">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">City</label>
+                <input type="text" class="form-control filters" name="city" placeholder="City">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">Area</label>
+                <input type="text" class="form-control filters" name="area" placeholder="Area">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">Address</label>
+                <input type="text" class="form-control filters" name="address" placeholder="Address">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">Contact Number</label>
+                <input type="text" class="form-control filters" name="contact_number" placeholder="Contact Number">
+              </div>
+              <div class="col-md-4 form-group">
+                <label for="">Date</label>
+                <input type="date" class="form-control filters" name="date_time" placeholder="Date Time">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
           <div class="section-body">
             <div class="row">
               <div class="col-12">
@@ -16,13 +60,16 @@ Blood Donors
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-striped table-hover" id="users" style="width:100%;">
+                      <table class="table table-striped table-hover table-sm" id="donors" style="width:100%;">
                         <thead>
                           <tr>
-                            <th>Image</th>
                             <th>Name</th>
                             <th>Age</th>
-                            <th>Upazila Name</th>
+                            <th>Country Name</th>
+                            <th>State Name</th>
+                            <th>City Name</th>
+                            <th>Area</th>
+                            <th>Address</th>
                             <th>Blood Group</th>
                             <th>Contact No</th>
                             <th>Last Donated Date</th>
@@ -38,28 +85,53 @@ Blood Donors
               </div>
             </div>
           </div>
+
         </section>
 @endsection
 @section('js')
 <script type="text/javascript">
-    //Roles table
-    $(document).ready( function(){
-  var roles_table = $('#users').DataTable({
-              processing: true,
-              serverSide: true,
-              ajax: "{{url('donors')}}",
-              buttons:[],
+//Roles table
+$(document).ready( function(){
+  var data_table;
+  function DataTableInit(data={}) {
+  data_table = $('#donors').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url:"{{url('donors')}}",
+        data:data,
+        },
+      buttons:[],
+      buttons:[],
               columns: [
-                {data: 'image', name: 'image', orderable: false, searchable: false},
                 {data: 'name', name: 'name'},
                 {data: 'age', name: 'age'},
-                {data: 'upazila_name', name: 'upazila_name'},
+                {data: 'country_id', name: 'country_id'},
+                {data: 'state_id', name: 'state_id'},
+                {data: 'city_id', name: 'city_id'},
+                {data: 'area_id', name: 'area_id'},
+                {data: 'address', name: 'address'},
                 {data: 'blood_group', name: 'blood_group'},
                 {data: 'contact_no', name: 'contact_no'},
                 {data: 'last_donate_date', name: 'last_donate_date'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
-          });
-      });
+  });
+}
+
+DataTableInit();
+
+
+$(document).on('change', '.filters', function () {
+var data={};
+$('.filters').each(function() {
+data[$(this).attr('name')]=$(this).val();
+});
+data_table.destroy();
+DataTableInit(data);
+});
+
+
+});
 </script>
 @endsection

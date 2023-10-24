@@ -1,0 +1,13 @@
+{
+    "name": "States",
+    "alias": "states",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\States\\Providers\\StatesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

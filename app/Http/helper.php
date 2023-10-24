@@ -1,5 +1,9 @@
 <?php
 use Modules\Settings\Entities\Settings;
+use Modules\Country\Entities\Country;
+use Modules\States\Entities\States;
+use Modules\Cities\Entities\Cities;
+use Modules\Areas\Entities\Areas;
 
 function AllPermissions()
 {
@@ -30,3 +34,47 @@ function Settings()
 {
 	return Settings::first();
 }
+
+function Country($id)
+{
+	$country=Country::find($id);
+	if ($country!=null) {
+		return $country->name;
+	}
+}
+
+function City($id)
+{
+	$cities=Cities::find($id);
+	if ($cities!=null) {
+		return $cities->name;
+	}
+}
+function Area($id)
+{
+	$area=Areas::find($id);
+	if ($area!=null) {
+		return $area->name;
+	}
+}
+
+function State($id)
+{
+	$states=States::find($id);
+	if ($states!=null) {
+		return $states->name;
+	}
+}
+
+function AllStates()
+{
+    $states=States::all();
+    return $states;
+}
+
+function AllCities()
+{
+    $cities=Cities::all();
+    return $cities;
+}
+

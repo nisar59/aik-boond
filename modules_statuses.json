@@ -2,5 +2,9 @@
     "Roles": true,
     "Users": true,
     "Settings": true,
-    "Donors": true
+    "Donors": true,
+    "Country": true,
+    "States": true,
+    "Cities": true,
+    "Areas": true
 }

@@ -25,6 +25,33 @@ $pref=Request()->route()->getPrefix();
             <li class="dropdown @if($pref=='/roles') active @endif"><a class="nav-link" href="{{url('roles')}}"><i class="fas fa-hands-helping"></i><span>Roles & Permissions</span></a></li>
             @endcan
 
+            <li class="menu-header">Countries</li>
+            @can('country.view')
+            <li class="dropdown @if($pref=='/country') active @endif">
+              <a href="{{url('country')}}" class="nav-link"><i class="fa fa-flag" aria-hidden="true"></i><span>Countries</span></a>
+            </li>
+            @endcan
+
+            <li class="menu-header">States</li>
+            @can('states.view')
+            <li class="dropdown @if($pref=='/states') active @endif">
+              <a href="{{url('states')}}" class="nav-link"><i class="fas fa-city"></i><span>States</span></a>
+            </li>
+            @endcan
+
+            <li class="menu-header">Cities</li>
+            @can('cities.view')
+            <li class="dropdown @if($pref=='/cities') active @endif">
+              <a href="{{url('cities')}}" class="nav-link"><i class="fas fa-city"></i><span>Cities</span></a>
+            </li>
+            @endcan
+
+            <li class="menu-header">Areas</li>
+            @can('areas.view')
+            <li class="dropdown @if($pref=='/areas') active @endif">
+              <a href="{{url('areas')}}" class="nav-link"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Areas</span></a>
+            </li>
+            @endcan
 
             <li class="menu-header">Blood Donors</li>
             @can('donors.view')
