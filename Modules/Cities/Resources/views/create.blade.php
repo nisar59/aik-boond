@@ -67,7 +67,6 @@ Cities
                     },
                     dataType: 'json',
                     success: function (result) {
-                      console.log(result);
                         $('#state-dropdown').html('<option value="">-- Select State --</option>');
                         $.each(result.states, function (key, value) {
                             $("#state-dropdown").append('<option value="' + value

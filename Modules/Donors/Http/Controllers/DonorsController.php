@@ -159,9 +159,7 @@ class DonorsController extends Controller
        
         $donor=Donor::find($id);
         $states=States::where('country_id',167)->get();
-        $cities=Cities::all();
-        $areas=Areas::all();
-        return view('donors::edit',compact('donor','states','cities','areas'));
+        return view('donors::edit',compact('donor','states'));
     }
 
     /**
