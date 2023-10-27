@@ -23,7 +23,7 @@ Route::group(['prefix'=>'cities','middleware' => ['permission:cities.add']],func
     Route::post('store',function(){
     	    return redirect('cities');
     });
-  /*  Route::get('/create', 'CitiesController@create');
+   /* Route::get('/create', 'CitiesController@create');
     Route::POST('/store', 'CitiesController@store');*/
 
 });
