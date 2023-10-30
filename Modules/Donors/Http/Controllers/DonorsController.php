@@ -117,7 +117,6 @@ class DonorsController extends Controller
     {
         $req->validate([
             'name'=>'required',
-            'age'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',
@@ -170,9 +169,11 @@ class DonorsController extends Controller
      */
     public function update(Request $req, $id)
     {
-        $req->validate([
+         $req->validate([
             'name'=>'required',
-            'age'=>'required',
+            'state_id'=>'required',
+            'city_id'=>'required',
+            'area_id'=>'required',
             'contact_no'=>'required',
             'last_donate_date'=>'required',
         ]);
@@ -198,47 +199,21 @@ class DonorsController extends Controller
      */
     public function destroy($id)
     {
-        if(Donor::find($id)->delete()){
-        return redirect('donors')->with('success', 'Blood Donor successfully Deleted');
-        }
-        else{
-        return redirect()->back()->with('error', 'Something went wrong');
-        }    
+         DB::beginTransaction();
+        try{
+        Donor::find($id)->delete();
+        DB::commit();
+         return redirect('donors')->with('success','Blood Donor successfully deleted');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }   
     }
-    public function apiindex($blood, $upz)
-    {
-       $slid=Donor::where('blood_group',$blood)->where('upazila_name', $upz)->get();
-       $data=[];
-       foreach ($slid as $key => $value) {
-        $path=public_path('img');
-        $url=url('img');
-        $img=$url.'/images.png';
-        if(file_exists($path.'/donor/'.$value->image) AND $value->image!=null){
-        $img=$url.'/donor/'.$value->image;
-        }
-        $value['image']=$img;
-         $value['upazila_name']=Upazila($value->upazila_name);
-        $data[]=$value; 
-       }
-       return response()->json($data);
-    }
+  
     
-    public function apidonor($id)
-    {
-       $slid=Donor::find($id);
-       
-       $data;
-       
-        $path=public_path('img');
-        $url=url('img');
-        $img=$url.'/images.png';
-        if(file_exists($path.'/donor/'.$slid->image) AND $slid->image!=null){
-        $img=$url.'/donor/'.$slid->image;
-        }
-        $slid['image']=$img;
-         $slid['upazila_name']=Upazila($slid->upazila_name);
-        $data=$slid; 
-      
-       return response()->json($data);
-    }
+    
 }

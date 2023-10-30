@@ -136,8 +136,7 @@ class AreasController extends Controller
     {
         $areas=Areas::find($id);
         $states=States::where('country_id',167)->get();
-        $cities=Cities::all();
-        return view('areas::edit',compact('areas','states','cities'));
+        return view('areas::edit',compact('areas','states'));
     }
 
     /**

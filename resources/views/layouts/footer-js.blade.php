@@ -8,8 +8,6 @@
   <script src="{{asset('assets/js/page/index.js')}}"></script>
   <!-- Template JS File -->
   <script src="{{asset('assets/js/scripts.js')}}"></script>
-  <!-- Custom JS File -->
-  <script src="{{asset('assets/js/custom.js')}}"></script>
 
 <script src="{{asset('assets/bundles/datatables/datatables.min.js')}}"></script>
   <script src="{{asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -19,6 +17,15 @@
   <script src="{{asset('assets/bundles/chartjs/chart.min.js')}}"></script>
 
   <script src="{{asset('assets/js/page/datatables.js')}}"></script>
+  <script src="{{asset('assets/bundles/izitoast/js/iziToast.min.js')}}"></script>
+
+    <!-- Custom JS File -->
+  <script src="{{asset('assets/bundles/tinymce/form-editor.init.js')}}"></script>
+  <script src="{{asset('assets/bundles/tinymce/jquery.tinymce.min.js')}}"></script>
+  <script src="{{asset('assets/bundles/tinymce/tinymce.min.js')}}"></script>
+
+  <script src="{{asset('assets/functions.js')}}"></script>
+
   <script type="text/javascript">
 
   $(document).ready(function(){
@@ -110,16 +117,6 @@
        });
 
   });
-
-
-var invc=`{!!Session::get('invoice')!!}`;
-console.log(invc);
-if(invc!=''){
-  newWin= window.open("",'print this');
-   newWin.document.write(invc);
-   newWin.print();
-   newWin.close();
-}
 
 
   });

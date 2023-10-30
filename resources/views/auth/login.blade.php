@@ -25,7 +25,7 @@
       <div class="container mt-5">
         <div class="row">
           <div class="col-md-12 text-center">
-            <img src="{{url('public/img/settings/'.Settings()->portal_logo)}}" width="50" height="50" class="m-2">
+            <img src="{{url('public/img/settings/'.Settings()->portal_favicon)}}" width="50" height="50" class="m-2">
             <h2>{{Settings()->portal_name}}</h2>
           </div>
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">

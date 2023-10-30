@@ -49,7 +49,7 @@ Settings
                   <div class="row">
                     <div class="form-group col-md-10">
                       <label>Panel Logo</label>
-                      <input type="file" class="form-control" name="panel_logo" id="panel_logo" onchange="document.getElementById('logo-display').src = window.URL.createObjectURL(this.files[0])">
+                      <input type="file" class="form-control" name="panel_logo" id="panel_logo" width="100%" height="100%" onchange="document.getElementById('logo-display').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <div class="form-group col-md-2">
                       <img src="{{$logo}}" class="image-display" id="logo-display" width="100" height="100">

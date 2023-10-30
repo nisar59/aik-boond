@@ -41,8 +41,17 @@ class HomeController extends Controller
      */
     public function fetchStates(Request $req)
     {
-        $data['states'] = States::where("country_id", $req->country_id)->get(["name", "id"]);
+         try {
+        $data['states'] =States::where("country_id", $req->country_id)->get(["name", "id"]);                          
         return response()->json($data);
+        }
+        catch(Exception $ex){
+         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }catch(Throwable $ex){
+        return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }
+
+
     }
     /**
      * Show the application dashboard.
@@ -53,16 +62,12 @@ class HomeController extends Controller
     public function fetchCity(Request $req)
     {
         try {
-          DB::transaction(function () {
         $data['cities'] =Cities::where("state_id", $req->state_id)->get(["name", "id"]);                          
         return response()->json($data);
-            });
         }
         catch(Exception $ex){
-            DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }catch(Throwable $ex){
-            DB::rollback();
         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }
         
@@ -78,11 +83,9 @@ class HomeController extends Controller
         $data['areas'] =Areas::where("city_id", $req->city_id)->get(["name", "id"]);                          
         return response()->json($data);
     }
-    catch(Exception $ex){
-            DB::rollback();
+         catch(Exception $ex){
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }catch(Throwable $ex){
-            DB::rollback();
         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }
 }

@@ -49,7 +49,7 @@ Areas
             </div>
           </div>
         </div>
-        <div class="card-footer text-end">
+        <div class="card-footer text-right">
           <button class="btn btn-primary mr-1" type="submit">Submit</button>
         </div>
       </div>
@@ -81,6 +81,9 @@ Areas
                                 .id + '">' + value.name + '</option>');
                         });
                         $('#city-dropdown').html('<option value="">-- Select City --</option>');
+                    },
+                    error:function(err) {
+                    error(err.statusText);
                     }
                 });
             });
@@ -103,6 +106,9 @@ Areas
                             $("#city-dropdown").append('<option value="' + value
                                 .id + '">' + value.name + '</option>');
                         });
+                    },
+                    error:function(err) {
+                    error(err.statusText);
                     }
                 });
 

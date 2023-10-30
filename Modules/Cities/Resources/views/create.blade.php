@@ -72,6 +72,9 @@ Cities
                             $("#state-dropdown").append('<option value="' + value
                                 .id + '">' + value.name + '</option>');
                         });
+                    },
+                    error:function(err) {
+                    error(err.statusText);
                     }   
                 });
             });

@@ -108,6 +108,9 @@ Blood Donor
                                 .id + '">' + value.name + '</option>');
                         });
                         $('#city-dropdown').html('<option value="">-- Select City --</option>');
+                    },
+                    error:function(err) {
+                    error(err.statusText);
                     }
                 });
             });
@@ -130,6 +133,9 @@ Blood Donor
                             $("#city-dropdown").append('<option value="' + value
                                 .id + '">' + value.name + '</option>');
                         });
+                    },
+                    error:function(err) {
+                      error(err.statusText);
                     }
                 });
                  $('#area-dropdown').html('<option value="">-- Select Area --</option>');
@@ -152,6 +158,9 @@ Blood Donor
         $.each(result.areas,function(key,value){
         $("#area-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
         });
+        },
+        error:function(err) {
+         error(err.statusText);
         }
         });
         });

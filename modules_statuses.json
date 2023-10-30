@@ -7,5 +7,6 @@
     "States": true,
     "Cities": true,
     "Areas": true,
-    "AddressesAndTowns": true
+    "AddressesAndTowns": true,
+    "Stories": true
 }

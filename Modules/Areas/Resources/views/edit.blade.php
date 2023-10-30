@@ -15,7 +15,7 @@ Areas
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="">States</label>
                     <select id="state-dropdown" class="form-control" name="state_id">
@@ -26,24 +26,21 @@ Areas
                     </select>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="">City</label>
-                    <select id="division-dropdown" class="form-control" name="city_id">
-                      <option value="">-- Select City --</option>
-                       @foreach($cities as $city)
-                      <option value="{{$city->id}}"{{ $city->id == $areas->city_id ? 'selected' : ''}} >{{$city->name}}</option>
-                      @endforeach
+                    <select id="city-dropdown" class="form-control" name="city_id">
+                    <option value="">-- Select City --</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="">Name</label>
                     <input type="text" class="form-control" value="{{$areas->name}}" name="name" placeholder="Enter Name">
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="">Nearest Place</label>
                     <input type="text" class="form-control" value="{{$areas->nearest_place}}" name="nearest_place" placeholder="Enter Nearest Place">
@@ -51,7 +48,7 @@ Areas
                 </div>
               </div>
             </div>
-            <div class="card-footer text-end">
+            <div class="card-footer text-right">
               <button class="btn btn-primary mr-1" type="submit">Submit</button>
             </div>
           </div>
@@ -60,4 +57,46 @@ Areas
     </form>
   </div>
 </section>
+@endsection
+@section('js')
+<script type="text/javascript">
+ $(document).ready(function() {
+
+setTimeout(function() {
+ $("#state-dropdown").trigger('change');
+}, 50);
+    /*------------------city listing----------------*/
+     $('#state-dropdown').on('change', function () {
+                var idState = this.value;
+                $("#city-dropdown").html('');
+                $.ajax({
+                    url: "{{url('cities')}}",
+                    type: "POST",
+                    data: {
+                        state_id: idState,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (res) {
+                        $('#city-dropdown').html('<option value="">-- Select City --</option>');
+                        $.each(res.cities, function (key, value) {
+                           var sel='';
+                           if(value.id=='{{$areas->city_id}}'){
+                            sel='selected';
+                           }
+                            $("#city-dropdown").append('<option value="' + value
+                                .id + '" '+sel+'>' + value.name + '</option>');
+                        });
+
+                        $('#city-dropdown').trigger('change');
+                    },
+                    error:function(err) {
+                    error(err.statusText);
+                    }
+                });
+
+            });
+    
+});
+</script>
 @endsection

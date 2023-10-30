@@ -51,10 +51,11 @@ Addresses And Towns
                   <label>Name</label>
                   <input type="text" class="form-control" name="name" value="{{$addresses_and_towns->name}}" placeholder="Enter Name">
                 </div>
+              </div>
               <div class="card-footer text-right">
                 <button class="btn btn-primary mr-1" type="submit">Submit</button>
               </div>
-            </div>
+            
           </div>
         </div>
       </form>

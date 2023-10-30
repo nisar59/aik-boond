@@ -18,30 +18,26 @@ Blood Donor
               <div class="row">
                 <div class="form-group col-md-6">
                   <label>Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Enter Name">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Age</label>
-                  <input type="number" class="form-control" min="0" name="age" placeholder="Enter Age">
+                  <input type="text" class="form-control" name="name" value="{{$donor->name}}" placeholder="Enter Name">
                 </div>
                 <input type="text" hidden name="country_id" value="167">
-              <div class="form-group col-md-6">
-                <label for="">States</label>
-                <select name="state_id" id="state-dropdown" class="form-control">
-                  <option value="">-- Select State --</option>
-                  @foreach($states as $state)
-                  <option value="{{$state->id}}"{{ $state->id == $donor->state_id ? 'selected' : ''}}>{{$state->name}}</option>
-                  @endforeach
-                </select>
-              </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="">City</label>
-                <select id="city-dropdown" class="form-control" name="city_id">
-                   <option value="">-- Select City --</option>
-                </select>
-              </div>
-            </div>
+                <div class="form-group col-md-6">
+                  <label for="">States</label>
+                  <select name="state_id" id="state-dropdown" class="form-control">
+                    <option value="">-- Select State --</option>
+                    @foreach($states as $state)
+                    <option value="{{$state->id}}"{{ $state->id == $donor->state_id ? 'selected' : ''}}>{{$state->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="">City</label>
+                    <select id="city-dropdown" class="form-control" name="city_id">
+                      <option value="">-- Select City --</option>
+                    </select>
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="">Area Name</label>
@@ -52,28 +48,29 @@ Blood Donor
                 </div>
                 <div class="form-group col-md-6">
                   <label>Address</label>
-                  <input type="text" class="form-control" name="address"  placeholder="Enter Address">
+                  <input type="text" class="form-control" name="address" value="{{$donor->address}}"  placeholder="Enter Address">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label>Blood Group</label>
-                  <select name="blood_group" class="form-control">
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
+                  <select class="form-control" name="blood_group">
+                    <option value="A+" @if($donor->blood_group=="A+") selected @endif>A+</option>
+                    <option value="A-" @if($donor->blood_group=="A-") selected @endif>A-</option>
+                    <option value="B+" @if($donor->blood_group=="B+") selected @endif>B+</option>
+                    <option value="B-" @if($donor->blood_group=="B-") selected @endif>B-</option>
+                    <option value="O+" @if($donor->blood_group=="O+") selected @endif>O+</option>
+                    <option value="O-" @if($donor->blood_group=="O-") selected @endif>O-</option>
+                    <option value="AB+" @if($donor->blood_group=="AB+") selected @endif>AB+</option>
+                    <option value="AB-" @if($donor->blood_group=="AB-") selected @endif>AB-</option>
+                    
                   </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label>Contact No</label>
-                  <input type="number" class="form-control" min="0" name="contact_no"  placeholder="Enter Contact No">
+                  <input type="number" class="form-control" min="0" value="{{$donor->contact_no}}" name="contact_no"  placeholder="Enter Contact No">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label>Last Donate Date</label>
-                  <input type="date" class="form-control" name="last_donate_date" placeholder="Enter Last Donate Date">
+                  <input type="date" class="form-control" value="{{$donor->last_donate_date}}" name="last_donate_date" placeholder="Enter Last Donate Date">
                 </div>
               </div>
               <div class="card-footer text-right">
@@ -89,6 +86,11 @@ Blood Donor
 @section('js')
 <script type="text/javascript">
  $(document).ready(function() {
+
+setTimeout(function() {
+ $("#state-dropdown").trigger('change');
+}, 50);
+
  $('#country-dropdown').on('change', function () {
                 var idCountry = this.value;
                 $("#state-dropdown").html('');
@@ -101,14 +103,16 @@ Blood Donor
                     },
                     dataType: 'json',
                     success: function (result) {
-                      console.log(result);
                         $('#state-dropdown').html('<option value="">-- Select State --</option>');
                         $.each(result.states, function (key, value) {
                             $("#state-dropdown").append('<option value="' + value
                                 .id + '">' + value.name + '</option>');
                         });
                         $('#city-dropdown').html('<option value="">-- Select City --</option>');
-                    }
+                    },
+                    error:function(err) {
+                    error(err.statusText);
+                     }
                 });
             });
 
@@ -127,9 +131,18 @@ Blood Donor
                     success: function (res) {
                         $('#city-dropdown').html('<option value="">-- Select City --</option>');
                         $.each(res.cities, function (key, value) {
+                           var sel='';
+                           if(value.id=='{{$donor->city_id}}'){
+                            sel='selected';
+                           }
                             $("#city-dropdown").append('<option value="' + value
-                                .id + '">' + value.name + '</option>');
+                                .id + '" '+sel+'>' + value.name + '</option>');
                         });
+
+                        $('#city-dropdown').trigger('change');
+                    },
+                    error:function(err) {
+                    error(err.statusText);
                     }
                 });
                  $('#area-dropdown').html('<option value="">-- Select Area --</option>');
@@ -150,8 +163,15 @@ Blood Donor
         success: function(result){
         $('#area-dropdown').html('<option value="">Select Area</option>');
         $.each(result.areas,function(key,value){
-        $("#area-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+          var sel='';
+          if(value.id=='{{$donor->area_id}}'){
+            sel='selected';
+          }
+        $("#area-dropdown").append('<option '+sel+' value="'+value.id+'">'+value.name+'</option>');
         });
+        },
+        error:function(err) {
+        error(err.statusText);
         }
         });
         });

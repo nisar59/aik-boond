@@ -33,8 +33,15 @@ Route::get('optimize-storffy', function () {
 });
 
 Auth::routes();
+Route::get('home','HomeController@index')->name('dashboard');
 Route::any('logout', 'Auth\LoginController@logout');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::post('states','HomeController@fetchStates');
 Route::post('cities','HomeController@fetchCity');
 Route::post('areas','HomeController@fetchAreas');
+		/*User Controller*/
+Route::get('index','UserController@index');
+Route::get('about-us','UserController@aboutUs');
+Route::get('services','UserController@services');
+Route::get('blog','UserController@blog');
+Route::get('contact-us','UserController@contactUs');

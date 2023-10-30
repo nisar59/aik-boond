@@ -6,13 +6,13 @@ $pref=Request()->route()->getPrefix();
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="{{url('/')}}"> <img alt="image" src="{{url('public/img/settings/'.Settings()->portal_logo)}}" class="header-logo" /> <span
-                class="logo-name">{{Settings()->portal_name}}</span>
+                class="logo-name"><!-- {{Settings()->portal_name}} --></span>
             </a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li class="dropdown @if($pref=='') active @endif">
-              <a href="{{url('/')}}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+              <a href="{{url('')}}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             @can('users.view')
             <li class="dropdown @if($pref=='/users') active @endif">
@@ -64,6 +64,13 @@ $pref=Request()->route()->getPrefix();
             @can('addresses-and-towns.view')
             <li class="dropdown @if($pref=='/addresses-and-towns') active @endif">
               <a href="{{url('addresses-and-towns')}}" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i><span>Addresses And Towns</span></a>
+            </li>
+            @endcan
+            
+            <li class="menu-header">Stories</li>
+            @can('stories.view')
+            <li class="dropdown @if($pref=='/stories') active @endif">
+              <a href="{{url('stories')}}" class="nav-link"><i class="fa fa-history" aria-hidden="true"></i><span>Stories</span></a>
             </li>
             @endcan
 
