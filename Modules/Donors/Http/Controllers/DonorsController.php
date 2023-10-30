@@ -105,6 +105,7 @@ class DonorsController extends Controller
     public function create()
     {
         $states=States::where('country_id',167)->get();
+        
         return view('donors::create',compact('states'));
     }
 

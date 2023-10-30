@@ -1,14 +1,6 @@
-<!doctype html>
-<html lang="en">
-@include('frontend.head')
-<body>
-  <!-- ======== header started ========= -->
-  @include('frontend.header')
+@extends('frontend.layouts.template')
 
-  <!-- ======== main started ========= -->
-
-  <main class="charity-01-main">
-
+@section('content')
       <!-- ======== banner started ========= -->
     <section class="banner">
       <!-- <div class="shap-svg-01">
@@ -356,11 +348,5 @@
         </div>
       </div>
     </section>
-  </main>
 
-  
-  @include('frontend.footer')
-</body>
-
-@include('frontend.footer-js')
-</html>
+@endsection

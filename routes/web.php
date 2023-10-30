@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('login');
-});
-
 Route::get('down', function () {
     Artisan::call('down');
     return redirect('login');
@@ -27,21 +23,36 @@ Route::get('up-storffy', function () {
 });
 
 
+
 Route::get('optimize-storffy', function () {
     Artisan::call('optimize:clear');
     return redirect('/');
 });
 
-Auth::routes();
+//Auth::routes();
+Route::group(['prefix' => 'admin'], function () {
+    Auth::routes();
+    Route::any('logout', 'Auth\LoginController@logout');
+});
+
+
 Route::get('home','HomeController@index')->name('dashboard');
-Route::any('logout', 'Auth\LoginController@logout');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::post('states','HomeController@fetchStates');
 Route::post('cities','HomeController@fetchCity');
 Route::post('areas','HomeController@fetchAreas');
 		/*User Controller*/
+Route::get('/','UserController@index');
 Route::get('index','UserController@index');
 Route::get('about-us','UserController@aboutUs');
 Route::get('services','UserController@services');
 Route::get('blog','UserController@blog');
 Route::get('contact-us','UserController@contactUs');
+
+Route::get('register','UserController@registerForm');
+Route::post('register','UserController@register');
+
+Route::get('login','UserController@showLoginForm');
+Route::post('login','UserController@login');
+
+

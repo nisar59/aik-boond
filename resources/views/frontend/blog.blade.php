@@ -1,13 +1,6 @@
-<!doctype html>
-<html lang="en">
-@include('frontend.head')
+@extends('frontend.layouts.template')
 
-<body>
-  <!-- ======== header started ========= -->
-  @include('frontend.header')
-  <!-- ======== main started ========= -->
-
-  <main class="charity-01-main">
+@section('content')
 
     <!-- ============abt-01 Section  Start============ -->
 
@@ -128,9 +121,4 @@
         </div>
     </section>
 
-  </main>
-
-  @include('frontend.footer')
-</body>
-@include('frontend.footer-js')
-</html>
+@endsection
