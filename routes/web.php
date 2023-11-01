@@ -32,17 +32,21 @@ Route::get('optimize-storffy', function () {
 //Auth::routes();
 Route::group(['prefix' => 'admin'], function () {
     Auth::routes();
-    Route::any('logout', 'Auth\LoginController@logout');
+    Route::any('/logout', 'Auth\LoginController@logout');
+});
+
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
+Route::get('home','HomeController@index');
+Route::get('dashboard', 'HomeController@index');
 });
 
 
-Route::get('home','HomeController@index')->name('dashboard');
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::post('states','HomeController@fetchStates');
 Route::post('cities','HomeController@fetchCity');
 Route::post('areas','HomeController@fetchAreas');
+
 		/*User Controller*/
-Route::get('/','UserController@index');
+Route::get('/','UserController@index')->name('landing-page');
 Route::get('index','UserController@index');
 Route::get('about-us','UserController@aboutUs');
 Route::get('services','UserController@services');
@@ -54,5 +58,5 @@ Route::post('register','UserController@register');
 
 Route::get('login','UserController@showLoginForm');
 Route::post('login','UserController@login');
-
+Route::get('logout', 'UserController@logout');
 

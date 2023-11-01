@@ -13,7 +13,9 @@ class UserController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = 'RouteServiceProvider::HOME';
+    protected $redirectTo = 'tokens/user-dashboard';
+
+
 
 
     function __construct()
@@ -138,17 +140,20 @@ class UserController extends Controller
     {
         $req->validate([
             'name'=>'required',
+            'age'=>'required',
+            'password'=>'required',
+            'blood_group'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',
             'contact_no'=>'required',
-            'last_donate_date'=>'required',
+            'address'=>'required',
         ]);
             DB::beginTransaction();
          try{
             Donor::create($req->except('_token'));
             DB::commit();
-            return redirect('donors')->with('success','You have sccessfully registered');
+            return redirect('tokens/user-dashboard')->with('success','You have sccessfully registered');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -171,9 +176,24 @@ class UserController extends Controller
      *
      * @return string
      */
+    /* public function userDashboard()
+    {
+        return view('frontend.auth.user-dashboard');
+    }*/
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
     public function username()
     {
         return 'contact_no';
+    }
+
+    function logout()
+    {
+        Auth::logout();
+        return Redirect('/');
     }
 
 

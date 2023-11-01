@@ -10,18 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'stories','middleware' => ['permission:stories.view']],function(){
     Route::get('/', 'StoriesController@index');
 });
 
 Route::group(['prefix'=>'stories','middleware' => ['permission:stories.add']],function(){
-    /*Route::get('/create',function(){
-    	    return redirect('stories');
-    });
-    Route::post('store',function(){
-    	    return redirect('stories');
-    });*/
     Route::get('/create', 'StoriesController@create');
     Route::POST('/store', 'StoriesController@store');
 
@@ -33,4 +27,5 @@ Route::group(['prefix'=>'stories','middleware' => ['permission:stories.edit']],f
 });
 Route::group(['prefix'=>'stories','middleware' => ['permission:stories.delete']],function(){
     Route::get('/destroy/{id}', 'StoriesController@destroy');
+});
 });

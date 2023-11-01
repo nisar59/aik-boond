@@ -8,5 +8,7 @@
     "Cities": true,
     "Areas": true,
     "AddressesAndTowns": true,
-    "Stories": true
+    "Stories": true,
+    "PaymentMethods": true,
+    "Tokens": true
 }

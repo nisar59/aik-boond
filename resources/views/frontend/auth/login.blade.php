@@ -18,7 +18,7 @@
 
                                     <div class="col-md-6 form-group">
                                         <label for="">Phone No</label>
-                                        <input type="text" class="form-control  @error('contact_no') is-invalid @enderror" placeholder="Enter phone no">
+                                        <input type="text" name="contact_no" class="form-control  @error('contact_no') is-invalid @enderror" placeholder="Enter phone no">
 
                                         @error('contact_no')
                                         <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
 
                                     <div class="col-md-6 form-group">
                                         <label for="">Password</label>
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter password">
+                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter password">
                                         
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -42,7 +42,7 @@
                                     <div class="col-12 text-center">
                                         <button type="submit" class="btn btn-primary">Login</button>
                                         <p><a href="">Forgot Password</a></p>
-                                        <p>Have not an account? <a href="">Register</a></p>
+                                        <p>Have not an account? <a href="{{url('register')}}">Register</a></p>
                                     </div>
                                 </div>                                 
                              </form>

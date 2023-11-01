@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'country','middleware' => ['permission:country.view']],function(){
     Route::get('/', 'CountryController@index');
 });
@@ -33,4 +33,5 @@ Route::group(['prefix'=>'country','middleware' => ['permission:country.edit']],f
 });
 Route::group(['prefix'=>'country','middleware' => ['permission:country.delete']],function(){
     Route::get('/destroy/{id}', 'CountryController@destroy');
+});
 });

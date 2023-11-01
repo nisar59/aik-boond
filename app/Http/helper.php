@@ -4,6 +4,8 @@ use Modules\Country\Entities\Country;
 use Modules\States\Entities\States;
 use Modules\Cities\Entities\Cities;
 use Modules\Areas\Entities\Areas;
+use Modules\PaymentMethods\Entities\PaymentMethods;
+
 
 function AllPermissions()
 {
@@ -17,6 +19,7 @@ function AllPermissions()
 	$role['addresses-and-towns']=['view','add','edit','delete'];
 	$role['donors']=['view','add','edit','delete'];
 	$role['stories']=['view','add','edit','delete'];
+	$role['payment-methods']=['view','add','edit','delete'];
 	$role['settings']=['view','add','edit','delete'];
 
 
@@ -25,16 +28,17 @@ return $role;
 
 }
 
-function FileUpload($img, $path){
-	if($img==null){return null;}
-	 $imgname=$img->getClientOriginalName();
-	  if($img->move($path,$imgname)){
+function FileUpload($file, $path){
+	if($file==null){return null;}
+	 $imgname=$file->getClientOriginalName();
+	  if($file->move($path,$imgname)){
 	  	return $imgname;
 	  }
 	  else{
 	  	return null;
 	  }
 }
+
 
 function Settings()
 {
@@ -48,6 +52,15 @@ function Country($id)
 		return $country->name;
 	}
 }
+
+function PaymentMethods($id)
+{
+	$p_method=PaymentMethods::find($id);
+	if ($p_method!=null) {
+		return $p_method->bank_name;
+	}
+}
+
 
 function City($id)
 {
@@ -74,7 +87,7 @@ function State($id)
 
 function AllStates()
 {
-    $states=States::all();
+    $states=States::where('country_id',167)->get();
     return $states;
 }
 

@@ -74,6 +74,20 @@ $pref=Request()->route()->getPrefix();
             </li>
             @endcan
 
+             <li class="menu-header">Payment Methods</li>
+            @can('payment-methods.view')
+            <li class="dropdown @if($pref=='/payment-methods') active @endif">
+              <a href="{{url('payment-methods')}}" class="nav-link"><i class="fa fa-credit-card" aria-hidden="true"></i><span>Payment Methods</span></a>
+            </li>
+            @endcan
+
+             <li class="menu-header">Token</li>
+            @can('payment-methods.view')
+            <li class="dropdown @if($pref=='/tokens') active @endif">
+              <a href="{{url('tokens/admin-dashboard')}}" class="nav-link"><i class="fa fa-credit-card" aria-hidden="true"></i><span>Token</span></a>
+            </li>
+            @endcan
+
 
             @can('settings.view')
             <li class="menu-header">Panel Settings</li>

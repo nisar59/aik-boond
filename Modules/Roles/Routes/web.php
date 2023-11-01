@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'roles','middleware' => ['permission:permissions.view']],function(){
 	Route::get('/', 'RolesController@index');
 });
@@ -26,4 +26,5 @@ Route::group(['prefix'=>'roles','middleware' => ['permission:permissions.edit']]
 });
 Route::group(['prefix'=>'roles','middleware' => ['permission:permissions.delete']],function(){
 	Route::get('/destroy/{id}', 'RolesController@destroy');
+});
 });

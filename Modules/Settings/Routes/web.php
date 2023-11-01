@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'settings','middleware' => ['permission:settings.view']],function(){
     Route::get('/', 'SettingsController@index');
 });
@@ -28,4 +28,5 @@ Route::group(['prefix'=>'settings','middleware' => ['permission:settings.add']],
 Route::group(['prefix'=>'settings','middleware' => ['permission:settings.add']],function(){
     Route::POST('/restorydefault', 'SettingsController@restorydefault');
 
+});
 });

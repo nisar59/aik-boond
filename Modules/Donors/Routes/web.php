@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'donors','middleware' => ['permission:donors.view']],function(){
     Route::get('/', 'DonorsController@index');
 });
@@ -27,4 +27,5 @@ Route::group(['prefix'=>'donors','middleware' => ['permission:donors.edit']],fun
 });
 Route::group(['prefix'=>'donors','middleware' => ['permission:donors.delete']],function(){
     Route::get('/destroy/{id}', 'DonorsController@destroy');
+});
 });

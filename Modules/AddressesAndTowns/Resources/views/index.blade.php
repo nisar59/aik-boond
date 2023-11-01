@@ -94,7 +94,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('addresses-and-towns')}}",
+        url:"{{url('admin/addresses-and-towns')}}",
         data:data,
         },
       buttons:[],

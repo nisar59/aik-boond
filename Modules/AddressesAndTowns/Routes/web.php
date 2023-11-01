@@ -11,24 +11,25 @@
 |
 */
 
-Route::prefix('addresses-and-towns')->group(function() {
-    Route::get('/', 'AddressesAndTownsController@index');
-});
 
-Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.view']],function(){
-    Route::get('/', 'AddressesAndTownsController@index');
-});
+Route::prefix('admin')->group(function() {
 
-Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.add']],function(){
-    Route::get('/create', 'AddressesAndTownsController@create');
-    Route::POST('/store', 'AddressesAndTownsController@store');
+	Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.view']],function(){
+	    Route::get('/', 'AddressesAndTownsController@index');
+	});
+
+	Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.add']],function(){
+	    Route::get('/create', 'AddressesAndTownsController@create');
+	    Route::POST('/store', 'AddressesAndTownsController@store');
 
 
-});
-Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.edit']],function(){
-    Route::get('/edit/{id}', 'AddressesAndTownsController@edit');
-    Route::POST('/update/{id}', 'AddressesAndTownsController@update');
-});
-Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.delete']],function(){
-    Route::get('/destroy/{id}', 'AddressesAndTownsController@destroy');
+	});
+	Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.edit']],function(){
+	    Route::get('/edit/{id}', 'AddressesAndTownsController@edit');
+	    Route::POST('/update/{id}', 'AddressesAndTownsController@update');
+	});
+	Route::group(['prefix'=>'addresses-and-towns','middleware' => ['permission:addresses-and-towns.delete']],function(){
+	    Route::get('/destroy/{id}', 'AddressesAndTownsController@destroy');
+	});
+
 });

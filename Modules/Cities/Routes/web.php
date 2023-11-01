@@ -11,7 +11,7 @@
 |
 */
 
-
+Route::prefix('admin')->group(function() {
 Route::group(['prefix'=>'cities','middleware' => ['permission:cities.view']],function(){
     Route::get('/', 'CitiesController@index');
 });
@@ -33,5 +33,6 @@ Route::group(['prefix'=>'cities','middleware' => ['permission:cities.edit']],fun
 });
 Route::group(['prefix'=>'cities','middleware' => ['permission:cities.delete']],function(){
     Route::get('/destroy/{id}', 'CitiesController@destroy');
+});
 });
 
