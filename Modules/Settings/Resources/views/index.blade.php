@@ -27,7 +27,7 @@ Settings
             @endphp
 
 
-            <form action="{{url('settings/store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{url('admin/settings/store')}}" method="post" enctype="multipart/form-data">
               @csrf  
             <div class="row">  
               <div class="col-12 col-md-12">

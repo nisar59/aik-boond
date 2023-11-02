@@ -11,7 +11,7 @@ Stories
                   <div class="card-header">
                     <h4 class="col-md-6">Stories</h4>
                     <div class="col-md-6 text-right">
-                    <a href="{{url('stories/create')}}" class="btn btn-success">+</a>
+                    <a href="{{url('admin/stories/create')}}" class="btn btn-success">+</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -43,7 +43,7 @@ Stories
   var roles_table = $('#stories').DataTable({
               processing: true,
               serverSide: true,
-              ajax: "{{url('stories')}}",
+              ajax: "{{url('admin/stories')}}",
               buttons:[],
               columns: [
                 {data: 'title', name: 'title',class:"text-center"},

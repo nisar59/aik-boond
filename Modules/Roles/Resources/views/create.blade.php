@@ -6,7 +6,7 @@ Roles & Permissions
         <section class="section">
           <div class="section-body">
             
-            <form action="{{url('roles/store')}}" method="post">
+            <form action="{{url('admin/roles/store')}}" method="post">
               @csrf  
             <div class="row">  
               <div class="col-12 col-md-12">

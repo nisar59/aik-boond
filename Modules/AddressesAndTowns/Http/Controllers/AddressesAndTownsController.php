@@ -51,10 +51,10 @@ class AddressesAndTownsController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('addresses-and-towns.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('addresses-and-towns/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/addresses-and-towns/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('addresses-and-towns.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('addresses-and-towns/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/addresses-and-towns/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })->editColumn('country_id',function ($row)
@@ -109,7 +109,7 @@ class AddressesAndTownsController extends Controller
          try{
             AddressesAndTowns::create($req->except('_token'));
             DB::commit();
-            return redirect('addresses-and-towns')->with('success','Addresses And Town sccessfully created');
+            return redirect('admin/addresses-and-towns')->with('success','Addresses And Town sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -161,7 +161,7 @@ class AddressesAndTownsController extends Controller
          try{
             AddressesAndTowns::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('addresses-and-towns')->with('success','Addresses And Town sccessfully Updated');
+            return redirect('admin/addresses-and-towns')->with('success','Addresses And Town sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -182,7 +182,7 @@ class AddressesAndTownsController extends Controller
         try{
         AddressesAndTowns::find($id)->delete();
         DB::commit();
-         return redirect('addresses-and-towns')->with('success','Addresses And Town successfully deleted');
+         return redirect('admin/addresses-and-towns')->with('success','Addresses And Town successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

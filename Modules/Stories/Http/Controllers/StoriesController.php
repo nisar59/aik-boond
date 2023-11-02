@@ -38,10 +38,10 @@ class StoriesController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('stories.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('stories/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/stories/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('stories.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('stories/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/stories/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })
@@ -76,7 +76,7 @@ class StoriesController extends Controller
          try{
             Stories::create($req->except('_token'));
         DB::commit();
-         return redirect('stories')->with('success','Story successfully created');
+         return redirect('admin/stories')->with('success','Story successfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -124,7 +124,7 @@ class StoriesController extends Controller
          try{
             Stories::find($id)->update($req->except('_token'));
         DB::commit();
-         return redirect('stories')->with('success','Story successfully Updated');
+         return redirect('admin/stories')->with('success','Story successfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -145,7 +145,7 @@ class StoriesController extends Controller
         try{
         Stories::find($id)->delete();
         DB::commit();
-         return redirect('stories')->with('success','Stories successfully deleted');
+         return redirect('admin/stories')->with('success','Stories successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

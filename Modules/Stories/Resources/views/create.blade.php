@@ -3,7 +3,7 @@
 Story
 @endsection
 @section('content')
-<form action="{{url('stories/store')}}" method="post" enctype="multipart/form-data">
+<form action="{{url('admin/stories/store')}}" method="post">
   @csrf
   <div class="row">
     <div class="col-12 col-md-12">

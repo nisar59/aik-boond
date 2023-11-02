@@ -63,10 +63,10 @@ class DonorsController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('donors.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('donors/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/donors/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('donors.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('donors/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/donors/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })->editColumn('country_id',function ($row)
@@ -122,13 +122,13 @@ class DonorsController extends Controller
             'city_id'=>'required',
             'area_id'=>'required',
             'contact_no'=>'required',
-            'last_donate_date'=>'required',
-        ]);
+/*            'last_donate_date'=>'required',
+*/        ]);
             DB::beginTransaction();
          try{
             Donor::create($req->except('_token'));
             DB::commit();
-            return redirect('donors')->with('success','Donor sccessfully created');
+            return redirect('admin/donors')->with('success','Donor sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -176,13 +176,13 @@ class DonorsController extends Controller
             'city_id'=>'required',
             'area_id'=>'required',
             'contact_no'=>'required',
-            'last_donate_date'=>'required',
-        ]);
+/*            'last_donate_date'=>'required',
+*/        ]);
             DB::beginTransaction();
          try{
             Donor::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('donors')->with('success','Donor sccessfully Updated');
+            return redirect('admin/donors')->with('success','Donor sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -204,7 +204,7 @@ class DonorsController extends Controller
         try{
         Donor::find($id)->delete();
         DB::commit();
-         return redirect('donors')->with('success','Blood Donor successfully deleted');
+         return redirect('admin/donors')->with('success','Blood Donor successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

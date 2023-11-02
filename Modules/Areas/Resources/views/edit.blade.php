@@ -5,7 +5,7 @@ Areas
 @section('content')
 <section class="section">
   <div class="section-body">
-    <form action="{{url('areas/update/'.$areas->id)}}" method="post">
+    <form action="{{url('admin/areas/update/'.$areas->id)}}" method="post">
       @csrf
       <div class="row">
         <div class="col-12 col-md-12">

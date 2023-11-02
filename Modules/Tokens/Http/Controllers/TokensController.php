@@ -25,7 +25,7 @@ class TokensController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('tokens.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('tokens/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('token/tokens/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
                return $action;
            })
@@ -69,7 +69,7 @@ class TokensController extends Controller
      * Show the form for creating a new resource.
      * @return Renderable
      */
-      public function indexx()
+      public function adminDashboard()
     {     
      
       if (request()->ajax()) {
@@ -77,9 +77,12 @@ class TokensController extends Controller
            return DataTables::of($tokens)
            ->addColumn('action',function ($row){
                $action='';
-               if(Auth::user()->can('tokens.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('tokens/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
-            }
+               /*if(Auth::user()->can('tokens.edit')){
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/tokens/adminEdit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+            }*/
+              if(Auth::user()->can('tokens.delete')){
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/tokens/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+           }
                return $action;
            })
            ->addColumn('fee_slip', function ($row) {
@@ -94,12 +97,12 @@ class TokensController extends Controller
 
                     return '<img src="'.$img.'" height="50" width="50">';
                 })
-           ->addColumn('status',function ($row){
+            ->addColumn('status',function ($row){
                $action='';
                if($row->status==0){
-                   $action.='<a class="btn btn-success btn-sm m-1">Active</a>';
+                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('admin/tokens/status/'.$row->id).'">Active</a>';
                 }else{
-                   $action.='<a class="btn btn-danger btn-sm m-1">Used</a>';
+                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/tokens/status/'.$row->id).'">Used</a>';
                 }
                return $action;
            })
@@ -143,7 +146,7 @@ class TokensController extends Controller
             $inputs['token']=$randomNumber;
             Tokens::create($inputs);
             DB::commit();
-            return redirect('tokens/user-dashboard')->with('success','Token sccessfully created');
+            return redirect('admin/tokens/user-dashboard')->with('success','Token sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -161,6 +164,35 @@ class TokensController extends Controller
     public function show($id)
     {
         return view('tokens::show');
+    }
+    /**
+     * Update status.
+     * @param int $id
+     * @return Renderable
+     */
+    public function status($id)
+    {
+        DB::beginTransaction();
+        try{
+        $page=Tokens::find($id);
+
+        if($page->status==1){
+            $page->status=0;
+        }
+        else{
+            $page->status=1;
+        }
+        $page->save();
+        DB::commit();
+         return redirect('admin/tokens')->with('success','Token status successfully updated');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }
     }
 
     /**
@@ -196,7 +228,7 @@ class TokensController extends Controller
             }
             Tokens::find($id)->update($inputs);
             DB::commit();
-            return redirect('tokens/user-dashboard')->with('success','Token sccessfully Updated');
+            return redirect('admin/tokens/user-dashboard')->with('success','Token sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -213,6 +245,18 @@ class TokensController extends Controller
      */
     public function destroy($id)
     {
-        //
+         DB::beginTransaction();
+        try{
+        Tokens::find($id)->delete();
+        DB::commit();
+         return redirect('admin/tokens')->with('success','Token successfully deleted');
+         
+         } catch(Exception $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         }catch(Throwable $e){
+            DB::rollback();
+            return redirect()->back()->with('error','Something went wrong with this error: '.$e->getMessage());
+         } 
     }
 }

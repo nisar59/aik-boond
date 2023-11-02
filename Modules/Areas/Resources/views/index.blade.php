@@ -48,7 +48,7 @@ Areas
           <div class="card-header">
             <h4 class="col-md-6">Areas</h4>
             <div class="col-md-6 text-right">
-              <a href="{{url('areas/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('admin/areas/create')}}" class="btn btn-success">+</a>
             </div>
           </div>
           <div class="card-body">
@@ -85,7 +85,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('areas')}}",
+        url:"{{url('admin/areas')}}",
         data:data,
         },
       buttons:[],

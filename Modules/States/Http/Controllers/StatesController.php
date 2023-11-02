@@ -46,10 +46,10 @@ class StatesController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('states')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('states/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/states/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('states.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('states/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/states/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })->editColumn('country_id',function ($row)
@@ -88,7 +88,7 @@ class StatesController extends Controller
          try{
             States::create($req->except('_token'));
             DB::commit();
-            return redirect('states')->with('success','State sccessfully created');
+            return redirect('admin/states')->with('success','State sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -137,7 +137,7 @@ class StatesController extends Controller
          try{
             States::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('states')->with('success','State sccessfully Updated');
+            return redirect('admin/states')->with('success','State sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -160,7 +160,7 @@ class StatesController extends Controller
         try{
         States::find($id)->delete();
         DB::commit();
-         return redirect('states')->with('success','State successfully deleted');
+         return redirect('admin/states')->with('success','State successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

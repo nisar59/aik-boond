@@ -23,11 +23,11 @@ class CountryController extends Controller
                 ->addColumn('action', function ($row) {
                     $action='';
                 if(Auth::user()->can('country.edit')){
-                $action.='<a class="btn btn-primary btn-sm" href="'.url('country/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+                $action.='<a class="btn btn-primary btn-sm" href="'.url('admin/country/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
                 }
                 if(Auth::user()->can('country.delete')){
                 $action.='
-                    <a class="btn btn-danger btn-sm" href="'.url('country/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+                    <a class="btn btn-danger btn-sm" href="'.url('admin/country/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
                 }                            
                 return $action;
                 })
@@ -61,7 +61,7 @@ class CountryController extends Controller
          try{
             Country::create($req->except('_token'));
             DB::commit();
-            return redirect('country')->with('success','Country sccessfully created');
+            return redirect('admin/country')->with('success','Country sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -109,7 +109,7 @@ class CountryController extends Controller
          try{
             Country::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('country')->with('success','Country sccessfully Updated');
+            return redirect('admin/country')->with('success','Country sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -132,7 +132,7 @@ class CountryController extends Controller
         try{
         Country::find($id)->delete();
         DB::commit();
-         return redirect('country')->with('success','Country successfully deleted');
+         return redirect('admin/country')->with('success','Country successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

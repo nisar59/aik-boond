@@ -6,7 +6,7 @@ Addresses And Towns
 <section class="section">
   <div class="section-body">
     
-    <form action="{{url('addresses-and-towns/update/'.$addresses_and_towns->id)}}" method="post">
+    <form action="{{url('admin/addresses-and-towns/update/'.$addresses_and_towns->id)}}" method="post">
       @csrf
       <div class="row">
         <div class="col-12 col-md-12">

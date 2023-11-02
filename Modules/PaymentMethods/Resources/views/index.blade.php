@@ -11,7 +11,7 @@ Payment Methods
           <div class="card-header">
             <h4 class="col-md-6">Payment Methods</h4>
             <div class="col-md-6 text-right">
-              <a href="{{url('payment-methods/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('admin/payment-methods/create')}}" class="btn btn-success">+</a>
             </div>
           </div>
           <div class="card-body">
@@ -47,7 +47,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('payment-methods')}}",
+        url:"{{url('admin/payment-methods')}}",
         data:data,
         },
       buttons:[],

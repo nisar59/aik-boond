@@ -57,7 +57,7 @@ Addresses And Towns
           <div class="card-header">
             <h4 class="col-md-6">Addresses And Towns</h4>
             <div class="col-md-6 text-right">
-              <a href="{{url('addresses-and-towns/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('admin/addresses-and-towns/create')}}" class="btn btn-success">+</a>
             </div>
           </div>
           <div class="card-body">

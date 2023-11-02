@@ -73,7 +73,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('states')}}",
+        url:"{{url('admin/states')}}",
         data:data,
         },
       buttons:[],

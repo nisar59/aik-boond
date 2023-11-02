@@ -5,7 +5,7 @@ Payment Methods
 @section('content')
 <section class="section">
   <div class="section-body">
-    <form action="{{url('payment-methods/update/'.$payment_methods->id)}}" method="post">
+    <form action="{{url('admin/payment-methods/update/'.$payment_methods->id)}}" method="post">
       @csrf
       <div class="row">
         <div class="col-12 col-md-12">

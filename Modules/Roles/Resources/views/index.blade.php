@@ -11,7 +11,7 @@ Roles & Permissions
                   <div class="card-header">
                     <h4 class="col-md-6">Roles & Permissions</h4>
                     <div class="col-md-6 text-right">
-                    <a href="{{url('roles/create')}}" class="btn btn-success">+</a>
+                    <a href="{{url('admin/roles/create')}}" class="btn btn-success">+</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -41,7 +41,7 @@ Roles & Permissions
   var roles_table = $('#roles').DataTable({
               processing: true,
               serverSide: true,
-              ajax: "{{url('roles')}}",
+              ajax: "{{url('admin/roles')}}",
               buttons:[],
               columnDefs: [ {
                   "targets": 1,

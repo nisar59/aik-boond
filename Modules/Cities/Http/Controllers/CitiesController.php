@@ -50,10 +50,10 @@ class CitiesController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('cities.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('cities/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/cities/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('cities.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('cities/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/cities/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })->editColumn('country_id',function ($row)
@@ -95,7 +95,7 @@ class CitiesController extends Controller
          try{
             Cities::create($req->except('_token'));
             DB::commit();
-            return redirect('cities')->with('success','Cities sccessfully created');
+            return redirect('admin/cities')->with('success','Cities sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -146,7 +146,7 @@ class CitiesController extends Controller
          try{
             Cities::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('cities')->with('success','Cities sccessfully Updated');
+            return redirect('admin/cities')->with('success','Cities sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -169,7 +169,7 @@ class CitiesController extends Controller
         try{
         Cities::find($id)->delete();
         DB::commit();
-         return redirect('cities')->with('success','City successfully deleted');
+         return redirect('admin/cities')->with('success','City successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

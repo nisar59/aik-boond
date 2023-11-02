@@ -37,19 +37,19 @@ class PaymentMethodsController extends Controller
            ->addColumn('action',function ($row){
                $action='';
                if(Auth::user()->can('payment-methods.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('payment-methods/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
+               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('admin/payment-methods/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
             }
             if(Auth::user()->can('payment-methods.delete')){
-               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('payment-methods/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
+               $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/payment-methods/destroy/'.$row->id).'"><i class="fas fa-trash-alt"></i></a>';
            }
                return $action;
            })
            ->addColumn('status',function ($row){
                $action='';
                if($row->status==1){
-                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('payment-methods/status/'.$row->id).'">Active</a>';
+                   $action.='<a class="btn btn-success btn-sm m-1" href="'.url('admin/payment-methods/status/'.$row->id).'">Active</a>';
                 }else{
-                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('payment-methods/status/'.$row->id).'">Deactive</a>';
+                   $action.='<a class="btn btn-danger btn-sm m-1" href="'.url('admin/payment-methods/status/'.$row->id).'">Deactive</a>';
                 }
                return $action;
            })
@@ -84,7 +84,7 @@ class PaymentMethodsController extends Controller
          try{
             PaymentMethods::create($req->except('_token'));
             DB::commit();
-            return redirect('payment-methods')->with('success','Payment Method sccessfully created');
+            return redirect('admin/payment-methods')->with('success','Payment Method sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -123,7 +123,7 @@ class PaymentMethodsController extends Controller
         }
         $page->save();
         DB::commit();
-         return redirect('payment-methods')->with('success','Payment Method status successfully updated');
+         return redirect('admin/payment-methods')->with('success','Payment Method status successfully updated');
          
          } catch(Exception $e){
             DB::rollback();
@@ -163,7 +163,7 @@ class PaymentMethodsController extends Controller
          try{
             PaymentMethods::find($id)->update($req->except('_token'));
             DB::commit();
-            return redirect('payment-methods')->with('success','Payment Method sccessfully Updated');
+            return redirect('admin/payment-methods')->with('success','Payment Method sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -184,7 +184,7 @@ class PaymentMethodsController extends Controller
         try{
         PaymentMethods::find($id)->delete();
         DB::commit();
-         return redirect('payment-methods')->with('success','Payment Method successfully deleted');
+         return redirect('admin/payment-methods')->with('success','Payment Method successfully deleted');
          
          } catch(Exception $e){
             DB::rollback();

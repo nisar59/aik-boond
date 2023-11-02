@@ -4,7 +4,7 @@
         <section class="section">
           <div class="section-body">
             
-            <form action="{{url('users/store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{url('admin/users/store')}}" method="post" enctype="multipart/form-data">
               @csrf  
             <div class="row">  
               <div class="col-12 col-md-12">

@@ -48,7 +48,7 @@ Cities
           <div class="card-header">
             <h4 class="col-md-6">Cities</h4>
             <!--   <div class="col-md-6 text-right">
-              <a href="{{url('cities/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('admin/cities/create')}}" class="btn btn-success">+</a>
             </div> -->
           </div>
           <div class="card-body">
@@ -83,7 +83,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('cities')}}",
+        url:"{{url('admin/cities')}}",
         data:data,
         },
       buttons:[],

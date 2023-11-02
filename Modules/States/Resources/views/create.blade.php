@@ -5,7 +5,7 @@ States
 @section('content')
 <section class="section">
   <div class="section-body">
-    <form action="{{url('states/store')}}" method="post">
+    <form action="{{url('admin/states/store')}}" method="post">
       @csrf
       <div class="row">
         <div class="col-12 col-md-12">

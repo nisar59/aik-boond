@@ -13,13 +13,14 @@
 Route::prefix('admin')->group(function() {
 
 Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.view']],function(){
-    Route::get('/', 'TokensController@indexx');
+    Route::get('/', 'TokensController@adminDashboard');
     Route::get('/destroy/{id}', 'TokensController@destroy');
 });
 
 Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.edit']],function(){
     Route::get('/edit/{id}', 'TokensController@edit');
     Route::POST('/update/{id}', 'TokensController@update');
+    Route::get('/status/{id}', 'TokensController@status');
 });
 
 Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.delete']],function(){

@@ -70,7 +70,7 @@ Blood Donors
           <div class="card-header">
             <h4 class="col-md-6">Blood Donors</h4>
             <div class="col-md-6 text-right">
-              <a href="{{url('donors/create')}}" class="btn btn-success">+</a>
+              <a href="{{url('admin/donors/create')}}" class="btn btn-success">+</a>
             </div>
           </div>
           <div class="card-body">
@@ -112,7 +112,7 @@ $(document).ready( function(){
       processing: true,
       serverSide: true,
       ajax: {
-        url:"{{url('donors')}}",
+        url:"{{url('admin/donors')}}",
         data:data,
         },
       buttons:[],

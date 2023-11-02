@@ -11,7 +11,7 @@ Countries
                   <div class="card-header">
                     <h4 class="col-md-6">Countries</h4>
                     <div class="col-md-6 text-right">
-<!--                     <a href="{{url('country/create')}}" class="btn btn-success">+</a>
+<!--                     <a href="{{url('admin/country/create')}}" class="btn btn-success">+</a>
  -->                    </div>
                   </div>
                   <div class="card-body">
@@ -41,7 +41,7 @@ Countries
   var roles_table = $('#countries').DataTable({
               processing: true,
               serverSide: true,
-              ajax: "{{url('country')}}",
+              ajax: "{{url('admin/country')}}",
               buttons:[],
               columns: [
                 {data: 'name', name: 'name',class:"text-center"},
