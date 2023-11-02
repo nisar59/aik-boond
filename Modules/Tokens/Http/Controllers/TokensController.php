@@ -10,7 +10,6 @@ use Modules\Tokens\Entities\Tokens;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use DB;
-use Carbon\Carbon;
 class TokensController extends Controller
 {
     /**
@@ -19,50 +18,8 @@ class TokensController extends Controller
      */
     public function index()
     {
-      if (request()->ajax()) {
-        $tokens=Tokens::select('*')->orderBy('id','ASC')->get();
-           return DataTables::of($tokens)
-           ->addColumn('action',function ($row){
-               $action='';
-               if(Auth::user()->can('tokens.edit')){
-               $action.='<a class="btn btn-primary btn-sm m-1" href="'.url('token/tokens/edit/'.$row->id).'"><i class="fas fa-pencil-alt"></i></a>';
-            }
-               return $action;
-           })
-           ->addColumn('fee_slip', function ($row) {
-                    /*floder name*/                    
-                    $path=public_path('images');
-                    /*floder name*/
-                    $url=url('images');
-                    $img=$url.'/images.png';
-                    if(file_exists($path.'/token/'.$row->fee_slip) AND $row->fee_slip!=null){
-                    $img=$url.'/token/'.$row->fee_slip;
-                    }
-
-                    return '<img src="'.$img.'" height="50" width="50">';
-                })
-           ->addColumn('status',function ($row){
-               $action='';
-               if($row->status==0){
-                   $action.='<a class="btn btn-success btn-sm m-1">Active</a>';
-                }else{
-                   $action.='<a class="btn btn-danger btn-sm m-1">Used</a>';
-                }
-               return $action;
-           })
-           ->editColumn('created_at',function($row)
-             {
-                 return Carbon::parse($row->created_at)->format('d-m-Y');
-             })
-           ->editColumn('payment_method',function($row)
-             {
-                 return PaymentMethods($row->payment_method);
-             })
-           ->rawColumns(['action','status','fee_slip'])
-           ->make(true);
-
-           } 
-        return view('tokens::index');
+      $tokens=Tokens::all();
+        return view('tokens::index',compact('tokens'));
     }
 
     /**
@@ -85,10 +42,8 @@ class TokensController extends Controller
            }
                return $action;
            })
-           ->addColumn('fee_slip', function ($row) {
-                    /*floder name*/                    
+           ->addColumn('fee_slip', function ($row) {                   
                     $path=public_path('images');
-                    /*floder name*/
                     $url=url('images');
                     $img=$url.'/images.png';
                     if(file_exists($path.'/token/'.$row->fee_slip) AND $row->fee_slip!=null){
@@ -141,12 +96,12 @@ class TokensController extends Controller
          try{
             $path=public_path('images/token');
             $inputs=$req->except('_token');
-            $randomNumber = number_format(random_int(10000, 99999));
+            $randomNumber = random_int(10000, 99999);
             $inputs['fee_slip']=FileUpload($req->fee_slip,$path);
             $inputs['token']=$randomNumber;
             Tokens::create($inputs);
             DB::commit();
-            return redirect('admin/tokens/user-dashboard')->with('success','Token sccessfully created');
+            return redirect('tokens/user-dashboard')->with('success','Token sccessfully created');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
@@ -217,8 +172,8 @@ class TokensController extends Controller
     {
         $req->validate([
             'payment_method'=>'required',
-            'fee_slip'=>'required',
-        ]);
+/*            'fee_slip'=>'required',
+*/        ]);
            DB::beginTransaction();
          try{
             $path=public_path('images/token');
@@ -228,7 +183,7 @@ class TokensController extends Controller
             }
             Tokens::find($id)->update($inputs);
             DB::commit();
-            return redirect('admin/tokens/user-dashboard')->with('success','Token sccessfully Updated');
+            return redirect('tokens/user-dashboard')->with('success','Token sccessfully Updated');
          }catch(Exception $ex){
             DB::rollback();
          return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());

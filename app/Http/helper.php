@@ -20,6 +20,7 @@ function AllPermissions()
 	$role['donors']=['view','add','edit','delete'];
 	$role['stories']=['view','add','edit','delete'];
 	$role['payment-methods']=['view','add','edit','delete'];
+	$role['tokes']=['view','add','edit','delete'];
 	$role['settings']=['view','add','edit','delete'];
 
 

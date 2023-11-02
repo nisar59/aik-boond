@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Throwable;
 use Auth;
 use DB;
-
+use Hash;
 class UserController extends Controller
 {
     use AuthenticatesUsers;
@@ -139,19 +139,22 @@ class UserController extends Controller
     public function register(Request $req)
     {
         $req->validate([
-            'name'=>'required',
+            'name'=>'required|max:255',
             'age'=>'required',
-            'password'=>'required',
+            'password'=>'required|confirmed|min:8',
             'blood_group'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',
-            'contact_no'=>'required',
+            'contact_no'=>'required|email|max:255|unique:donors',
             'address'=>'required',
         ]);
+
             DB::beginTransaction();
          try{
-            Donor::create($req->except('_token'));
+            $inputs=$req->except('_token','password');
+            $inputs['password']=Hash::make($req->password);
+            Donor::create($inputs);
             DB::commit();
             return redirect('tokens/user-dashboard')->with('success','You have sccessfully registered');
          }catch(Exception $ex){

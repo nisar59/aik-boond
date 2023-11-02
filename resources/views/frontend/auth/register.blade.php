@@ -14,19 +14,19 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="">Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                                <input type="text" class="form-control" name="name" placeholder="Enter Name" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="">Phone No</label>
-                                <input type="text" class="form-control" name="contact_no" placeholder="Enter Name">
+                                <input type="text" class="form-control" name="contact_no" placeholder="Enter Name" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="">Password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Enter Name">
+                                <input type="password" class="form-control" name="password" placeholder="Enter Name" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="">Age</label>
-                                <input type="number" min="18" name="age" class="form-control" placeholder="Enter Age">
+                                <input type="number" min="18" name="age" class="form-control" required placeholder="Enter Age">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Blood Group</label>

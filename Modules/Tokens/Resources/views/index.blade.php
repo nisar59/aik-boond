@@ -1,57 +1,56 @@
 @extends('frontend.layouts.template')
 @section('content')
 <!-- ============abt-01 Section  Start============ -->
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="col-md-12">Token</h4>
-						<div class="col-md-12 text-right">
-							<a href="{{url('tokens/create')}}" class="btn btn-success">+</a>
-						</div>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="col-md-12">Token</h4>
+					<div class="col-md-12 text-right">
+						<a href="{{url('tokens/create')}}" class="btn btn-success">+</a>
 					</div>
-					<div class="card-body">
-						<div class="table-responsive table-sm">
-							<table class="table table-striped table-hover table-sm" id="tokens" style="width:100%;">
-								<thead>
-									<tr>
-										<th>Payment Method</th>
-										<th>Fee Slip</th>
-										<th>Token</th>
-										<th>Status</th>
-										<th>Date</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-					</div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-condensed">
+						<thead>
+							<tr>
+								<th><strong>Payment Method</strong></th>
+								<th><strong>Fee Slip</strong></th>
+								<th><strong>Token</strong></th>
+								<th><strong>Status</strong></th>
+								<th><strong>Date</strong></th>
+								<th><strong>Action</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+							@forelse($tokens as $token)
+							<tr>
+								<th>{{ PaymentMethods($token->payment_method)}}</th>
+								<th>
+									<img src="{{ url('images/token/'.$token->fee_slip) }}" height="50px" width="50px" alt=""/>
+								</th>
+								<th>{{ $token->token}}</th>
+								<th>
+									@if($token->status== 0)
+									<button class="btn btn-success">Active</button>
+									@else
+									<button class="btn btn-danger">Used</button>
+									@endif
+								</th>
+								<th>{{ $token->created_at->format('d,m, Y')}}</th>
+								<th type="submit"><a href="{{ url('tokens/edit/'.$token->id) }}"><i class="fas fa-pencil-alt"></i>
+                                 </a>
+                                    </th>
+							</tr>
+							@empty
+							<tr><td colspan="4">No record found</td></tr>
+							@endforelse
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-@endsection
-@section('js')
-<script type="text/javascript">
-				//Roles table
-				$(document).ready( function(){
-				var roles_table = $('#tokens').DataTable({
-				processing: true,
-				serverSide: true,
-				ajax: "{{url('tokens/user-dashboard')}}",
-				buttons:[],
-				columns: [
- 				{data: 'payment_method', name: 'payment_method'},
-                {data: 'fee_slip', name: 'fee_slip',class:'text-center', orderable: false, searchable: false ,class:'text-center'},
-                {data: 'token', name: 'token'},
-                {data: 'status', name: 'status', orderable: false, searchable: false },
-                {data: 'created_at', name: 'created_at'},
-                {data: 'action', name: 'action', orderable: false, searchable: false,class:'text-center'},
-				]
-				});
-				});
-</script>
+</div>
 @endsection
