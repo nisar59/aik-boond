@@ -84,7 +84,7 @@ $pref=Request()->route()->getPrefix();
              <li class="menu-header">Token</li>
             @can('payment-methods.view')
             <li class="dropdown @if($pref=='/tokens') active @endif">
-              <a href="{{url('admin/tokens/')}}" class="nav-link"><i class="fa fa-credit-card" aria-hidden="true"></i><span>Token</span></a>
+              <a href="{{url('admin/tokens')}}" class="nav-link"><i class="fa fa-key" aria-hidden="true"></i><span>Token</span></a>
             </li>
             @endcan
 

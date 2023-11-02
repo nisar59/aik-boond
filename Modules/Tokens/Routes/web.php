@@ -14,7 +14,6 @@ Route::prefix('admin')->group(function() {
 
 Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.view']],function(){
     Route::get('/', 'TokensController@adminDashboard');
-    Route::get('/destroy/{id}', 'TokensController@destroy');
 });
 
 Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.edit']],function(){
@@ -28,10 +27,6 @@ Route::group(['prefix'=>'tokens', 'middleware'=>['permission:tokens.delete']],fu
 });
 
 });
-
-
-
-
 
 
 Route::group(['prefix'=>'tokens','middleware'=>'auth'],function(){
