@@ -82,9 +82,9 @@ Blood Donors
                     <th>State Name</th>
                     <th>City Name</th>
                     <th>Area</th>
+                    <th>Address</th>
                     <th>Name</th>
                     <th>Age</th>
-                    <th>Address</th>
                     <th>Blood Group</th>
                     <th>Contact No</th>
                     <th>Last Donated Date</th>
@@ -122,9 +122,9 @@ $(document).ready( function(){
                 {data: 'state_id', name: 'state_id'},
                 {data: 'city_id', name: 'city_id'},
                 {data: 'area_id', name: 'area_id'},
+                {data: 'address_id', name: 'address_id'},
                 {data: 'name', name: 'name'},
                 {data: 'age', name: 'age'},
-                {data: 'address', name: 'address'},
                 {data: 'blood_group', name: 'blood_group'},
                 {data: 'contact_no', name: 'contact_no'},
                 {data: 'last_donate_date', name: 'last_donate_date'},

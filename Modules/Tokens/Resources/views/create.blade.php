@@ -1,6 +1,5 @@
 @extends('frontend.layouts.template')
 @section('content')
-<!-- ============abt-01 Section  Start============ -->
 <section class="bg-0-b">
   <div class="container">
     <div class="row">
@@ -35,4 +34,5 @@
     </div>
   </div>
 </section>
+
 @endsection

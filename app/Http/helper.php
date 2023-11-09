@@ -4,6 +4,7 @@ use Modules\Country\Entities\Country;
 use Modules\States\Entities\States;
 use Modules\Cities\Entities\Cities;
 use Modules\Areas\Entities\Areas;
+use Modules\AddressesAndTowns\Entities\AddressesAndTowns;
 use Modules\PaymentMethods\Entities\PaymentMethods;
 
 
@@ -72,7 +73,14 @@ function City($id)
 }
 function Area($id)
 {
-	$area=Areas::find($id);
+	$address=Areas::find($id);
+	if ($address!=null) {
+		return $address->name;
+	}
+}
+function Address($id)
+{
+	$area=AddressesAndTowns::find($id);
 	if ($area!=null) {
 		return $area->name;
 	}

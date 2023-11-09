@@ -34,7 +34,7 @@
                             
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary">Login</button>
-                                <p><a href="">Forgot Password</a></p>
+                                <p><a href="{{url('forget')}}">Forgot Password</a></p>
                                 <p>Have not an account? <a href="{{url('register')}}">Register</a></p>
                             </div>
                         </div>

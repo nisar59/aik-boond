@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = 'tokens/user-dashboard';
+    protected $redirectTo = 'admin/dashboard';
 
 
 
@@ -129,12 +129,30 @@ class UserController extends Controller
         //
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
     public function registerForm()
     {
         return view('frontend.auth.register');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+      public function forgotForm()
+    {
+        return view('frontend.auth.forgotform');
+    }
+
 
     public function register(Request $req)
     {
@@ -179,15 +197,7 @@ class UserController extends Controller
      *
      * @return string
      */
-    /* public function userDashboard()
-    {
-        return view('frontend.auth.user-dashboard');
-    }*/
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
+     
     public function username()
     {
         return 'contact_no';

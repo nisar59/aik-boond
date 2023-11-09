@@ -44,6 +44,7 @@ Route::get('dashboard', 'HomeController@index');
 Route::post('states','HomeController@fetchStates');
 Route::post('cities','HomeController@fetchCity');
 Route::post('areas','HomeController@fetchAreas');
+Route::post('address','HomeController@fetchAdress');
 
 		/*User Controller*/
 Route::get('/','UserController@index')->name('landing-page');
@@ -55,6 +56,9 @@ Route::get('contact-us','UserController@contactUs');
 
 Route::get('register','UserController@registerForm');
 Route::post('register','UserController@register');
+
+Route::get('forget','UserController@forgotForm');
+
 
 Route::get('login','UserController@showLoginForm');
 Route::post('login','UserController@login');

@@ -7,7 +7,7 @@
             <div class="menu-hamburger"></div>
           </div>
           <div class="logo">
-            <img src="{{asset('frontend-asset/images/logo.png')}}">
+            <img src="{{url('public/img/settings/'.Settings()->portal_logo)}}">
           </div>
           <div class="menu-items">
             <div class="menu">
@@ -20,7 +20,7 @@
                 <li><a href="{{url('login')}}">Login</a></li>
                 <li><a href="{{url('logout')}}">Logout</a></li>
               </ul>
-             <!--  <ul class="navbar-nav">
+              <!--  <ul class="navbar-nav">
                 @guest
                 <li class="nav-item">
                   <a class="nav-link" href="{{ url('login') }}">Login</a>

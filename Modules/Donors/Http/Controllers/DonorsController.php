@@ -9,6 +9,7 @@ use Modules\Donors\Entities\Donor;
 use Modules\States\Entities\States;
 use Modules\Cities\Entities\Cities;
 use Modules\Areas\Entities\Areas;
+use Modules\AddressesAndTowns\Entities\AddressesAndTowns;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
 use DB;
@@ -85,6 +86,10 @@ class DonorsController extends Controller
            {
                return Area($row->area_id);
            })
+          ->editColumn('address_id',function ($row)
+           {
+               return Address($row->address_id);
+           })
            ->editColumn('last_donate_date',function($row)
              {
                  return Carbon::parse($row->last_donate_date)->format('d-m-Y');
@@ -105,7 +110,6 @@ class DonorsController extends Controller
     public function create()
     {
         $states=States::where('country_id',167)->get();
-        
         return view('donors::create',compact('states'));
     }
 
@@ -118,9 +122,12 @@ class DonorsController extends Controller
     {
         $req->validate([
             'name'=>'required',
+            'age'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',
+            'address_id'=>'required',
+            'blood_group'=>'required',
             'contact_no'=>'required',
 /*            'last_donate_date'=>'required',
 */        ]);
@@ -172,9 +179,12 @@ class DonorsController extends Controller
     {
          $req->validate([
             'name'=>'required',
+            'age'=>'required',
             'state_id'=>'required',
             'city_id'=>'required',
             'area_id'=>'required',
+            'address_id'=>'required',
+            'blood_group'=>'required',
             'contact_no'=>'required',
 /*            'last_donate_date'=>'required',
 */        ]);

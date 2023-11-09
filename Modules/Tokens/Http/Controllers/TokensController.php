@@ -13,13 +13,15 @@ use DB;
 use Carbon;
 class TokensController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-      $tokens=Tokens::all();
+        $id=Auth::user()->id;
+        $tokens=Tokens::where('id',$id)->get();
         return view('tokens::index',compact('tokens'));
     }
 

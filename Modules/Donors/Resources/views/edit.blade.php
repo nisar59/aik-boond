@@ -20,6 +20,10 @@ Blood Donor
                   <label>Name</label>
                   <input type="text" class="form-control" name="name" value="{{$donor->name}}" placeholder="Enter Name">
                 </div>
+                <div class="form-group col-md-6">
+                  <label>Age</label>
+                  <input type="text" class="form-control" name="age" value="{{$donor->age}}" placeholder="Enter Age">
+                </div>
                 <input type="text" hidden name="country_id" value="167">
                 <div class="form-group col-md-6">
                   <label for="">States</label>
@@ -48,9 +52,11 @@ Blood Donor
                 </div>
                 <div class="form-group col-md-6">
                   <label>Address</label>
-                  <input type="text" class="form-control" name="address" value="{{$donor->address}}"  placeholder="Enter Address">
+                  <select id="address-dropdown" class="form-control" name="address_id">
+                      <option value="">-- Select Address --</option>
+                    </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label>Blood Group</label>
                   <select class="form-control" name="blood_group">
                     <option value="A+" @if($donor->blood_group=="A+") selected @endif>A+</option>
@@ -64,11 +70,11 @@ Blood Donor
                     
                   </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label>Contact No</label>
                   <input type="number" class="form-control" min="0" value="{{$donor->contact_no}}" name="contact_no"  placeholder="Enter Contact No">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label>Last Donate Date</label>
                   <input type="date" class="form-control" value="{{$donor->last_donate_date}}" name="last_donate_date" placeholder="Enter Last Donate Date">
                 </div>
@@ -91,6 +97,7 @@ setTimeout(function() {
  $("#state-dropdown").trigger('change');
 }, 50);
 
+ 
  $('#country-dropdown').on('change', function () {
                 var idCountry = this.value;
                 $("#state-dropdown").html('');
@@ -169,12 +176,42 @@ setTimeout(function() {
           }
         $("#area-dropdown").append('<option '+sel+' value="'+value.id+'">'+value.name+'</option>');
         });
+        $('#area-dropdown').trigger('change');
         },
         error:function(err) {
         error(err.statusText);
         }
         });
         });
+
+         /*Address*/
+         $('#area-dropdown').on('change', function() {
+           var area_id = this.value;
+           $("#address-dropdown").html('');
+           $.ajax({
+            url:"{{url('address')}}",
+            type: "POST",
+            data: {
+            area_id: area_id,
+            _token: '{{csrf_token()}}'
+            },
+            dataType : 'json',
+            success: function(result){
+            $('#address-dropdown').html('<option value="">Select Address</option>');
+            $.each(result.address,function(key,value){
+              var sel='';
+              if(value.id=='{{$donor->address_id}}'){
+                sel='selected';
+              }
+            $("#address-dropdown").append('<option '+sel+' value="'+value.id+'">'+value.name+'</option>');
+            });
+
+            },
+            error:function(err) {
+            error(err.statusText);
+            }
+            });
+          });
 });
 </script>
 @endsection

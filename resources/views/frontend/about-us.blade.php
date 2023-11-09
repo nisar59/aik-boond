@@ -34,7 +34,7 @@
           <div class="col-lg-6 col-md-6 col-12 ">
             <div class="_do_er_xs">
               <div class="_kl_de_s">
-                <img src="assets/images/slider/donation-01.png">
+                <img src="{{URL::To('frontend-asset/images/slider/donation-01.png')}}">
               </div>
             </div>
           </div>
@@ -68,7 +68,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="team-wrapper">
               <div class="team-img">
-                <img src="assets/images/team/1.jpg">
+                <img src="{{URL::To('frontend-asset/images/team/1.jpg')}}">
               </div>
               <div class="team-content">
                 <h3>James</h3>
@@ -87,7 +87,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="team-wrapper">
               <div class="team-img">
-                <img src="assets/images/team/3.jpg">
+                <img src="{{URL::To('frontend-asset/images/team/3.jpg')}}">
               </div>
               <div class="team-content">
                 <h3>Albert</h3>
@@ -106,7 +106,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="team-wrapper">
               <div class="team-img">
-                <img src="assets/images/team/2.jpg">
+                <img src="{{URL::To('frontend-asset/images/team/2.jpg')}}">
               </div>
               <div class="team-content">
                 <h3>Johns</h3>
@@ -125,7 +125,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-12">
             <div class="team-wrapper">
               <div class="team-img">
-                <img src="assets/images/team/4.jpg">
+                <img src="{{URL::To('frontend-asset/images/team/4.jpg')}}">
               </div>
               <div class="team-content">
                 <h3>Smith</h3>

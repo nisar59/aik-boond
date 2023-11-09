@@ -31,6 +31,7 @@
                             <div class="form-group col-md-6">
                                 <label>Blood Group</label>
                                 <select name="blood_group" class="form-control">
+                                    <option value="">-- Select Blood Group --</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
                                     <option value="B+">B+</option>
@@ -50,7 +51,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">City</label>
                                     <select id="city-dropdown" class="form-control" name="city_id">
@@ -58,7 +59,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Area Name</label>
                                     <select id="area-dropdown" class="form-control" name="area_id">
@@ -66,9 +67,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label for="">Address / Town</label>
-                                <input type="text" class="form-control" name="address" placeholder="Enter Name">
+                                    <div class="form-group col-md-4">
+                              <label>Address</label>
+                             <select id="address-dropdown" class="form-control" name="address_id">
+                                  <option value="">-- Select Address --</option>
+                                </select>
                             </div>
                             <div class="col-12 text-center">
                                 <button class="btn btn-primary">Register</button>
@@ -161,6 +164,29 @@
         }
         });
         });
+      /*Address*/
+     $('#area-dropdown').on('change', function() {
+      var area_id = this.value;
+       $("#address-dropdown").html('');
+       $.ajax({
+        url:"{{url('address')}}",
+        type: "POST",
+        data: {
+        area_id: area_id,
+        _token: '{{csrf_token()}}'
+        },
+        dataType : 'json',
+        success: function(result){
+        $('#address-dropdown').html('<option value="">Select Address</option>');
+        $.each(result.address,function(key,value){
+        $("#address-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+        });
+        },
+        error:function(err) {
+         error(err.statusText);
+        }
+        });
+      });
 });
 </script>
 @endsection

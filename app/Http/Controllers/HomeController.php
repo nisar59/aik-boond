@@ -8,6 +8,7 @@ use Modules\Donors\Entities\Donor;
 use Modules\States\Entities\States;
 use Modules\Cities\Entities\Cities;
 use Modules\Areas\Entities\Areas;
+use Modules\AddressesAndTowns\Entities\AddressesAndTowns;
 use Auth;
 class HomeController extends Controller
 {
@@ -88,7 +89,25 @@ class HomeController extends Controller
         }catch(Throwable $ex){
         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
         }
-}
+        }
+
+           /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+        public function fetchAdress(Request $req)
+    {
+        try{
+        $data['address'] =AddressesAndTowns::where("area_id", $req->area_id)->get(["name", "id"]);                          
+        return response()->json($data);
+    }
+         catch(Exception $ex){
+         return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }catch(Throwable $ex){
+        return redirect()->back()->with('error','Something went wrong with this error: '.$ex->getMessage());
+        }
+        }
 
     
 }

@@ -52,11 +52,14 @@ Blood Donor
                 </div>
                 <div class="form-group col-md-6">
                   <label>Address</label>
-                  <input type="text" class="form-control" name="address"  placeholder="Enter Address">
+                 <select id="address-dropdown" class="form-control" name="address_id">
+                      <option value="">-- Select Address --</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
                   <label>Blood Group</label>
                   <select name="blood_group" class="form-control">
+                    <option value="">-- Select Blood Group --</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -163,7 +166,32 @@ Blood Donor
          error(err.statusText);
         }
         });
+        $('#address-dropdown').html('<option value="">-- Select Area --</option>');
         });
+
+     /*Address*/
+     $('#area-dropdown').on('change', function() {
+      var area_id = this.value;
+       $("#address-dropdown").html('');
+       $.ajax({
+        url:"{{url('address')}}",
+        type: "POST",
+        data: {
+        area_id: area_id,
+        _token: '{{csrf_token()}}'
+        },
+        dataType : 'json',
+        success: function(result){
+        $('#address-dropdown').html('<option value="">Select Address</option>');
+        $.each(result.address,function(key,value){
+        $("#address-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+        });
+        },
+        error:function(err) {
+         error(err.statusText);
+        }
+        });
+      });
 });
 </script>
 @endsection

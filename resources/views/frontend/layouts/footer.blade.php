@@ -63,8 +63,7 @@
           <div class="row _pl_we_sq">
             <div class="col-12">
               <div class="last-01">
-                <p>2015 @ All Rights Reserved Designed and developed by<a
-                    href="https://www.smarteyeapps.com">SmarteyeTechnologies</a></p>
+                <p class="text-center">{{Settings()->portal_name}}</p>
               </div>
             </div>
           </div>
